@@ -1,2 +1,2 @@
-# CRG_20240212
-Clock Reset Generator Project
+# Clock Reset Generator Project
+<img src=docs/top_IO.svg>
