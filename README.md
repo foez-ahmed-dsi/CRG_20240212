@@ -1,4 +1,4 @@
-# Clock Reset Generator Project
+# Clock Reset Generator
 This device is meant to generate `n` clocks output for a selection of `m` PLL clock sources. The top level IOs of the blackbox design is shown below.
 
 <img src=docs/top_IO.svg>
