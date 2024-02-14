@@ -21,7 +21,7 @@ module delay_gen #(
         if (rst) begin
             count<= 0;
         end else begin
-			      if(en) begin
+            if(en) begin
                 count <= count + 1; 
             end
         end
