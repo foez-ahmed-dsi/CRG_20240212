@@ -1,23 +1,27 @@
-module edge_detector (
-
-	input logic global_rst,
-	input logic arst_req_a,
-	input logic clk_ref,
-	output logic edge_out
+////////////////////////////////////////////////////////////////////////////////
+//Name : Shahid Uddin Ahmed
+//Email : shahid.ahmed@dsinnovators.com
+////////////////////////////////////////////////////////////////////////////////
 
 
-	);
-  
-	logic q1,q2;
-  
-	always_ff @ (posedge clk_ref)
-    
-	begin
-		q1<= global_rst && ~arst_req_a;
-		q2<= ~{(global_rst && ~arst_req_a) ||(~q1)};
-      
- 	end
-	
-	assign edge_out=~q2;
-  
+module edge_detector(
+    input logic e_data_i,
+    input logic clk_ref,
+    output logic edge_out_bar
+);
+
+    logic d_2, q_bar_1;
+
+    always_ff @ (posedge clk_ref) begin
+        q_bar_1 <= ~(e_data_i);
+    end
+
+    always_comb begin
+        d_2 = ~(q_bar_1 | e_data_i);
+    end
+
+    always_ff @ (posedge clk_ref) begin
+        edge_out_bar <= ~d_2;
+    end
+
 endmodule
