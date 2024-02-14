@@ -1,4 +1,4 @@
-module GFMux(input logic sel,
+module clk_mux_2x1.sv(input logic sel,
              input logic PLL1,
              input logic PLL2,
              output logic CLK_I);
