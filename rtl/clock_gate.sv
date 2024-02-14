@@ -4,7 +4,7 @@
 //
 //
 ////////////////////////////////////////////
-module DFF_CG(
+module clock_gate(
     input logic EN,
     input logic CLK,
     input logic RST_N,
