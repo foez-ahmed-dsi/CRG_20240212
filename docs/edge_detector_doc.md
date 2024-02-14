@@ -6,3 +6,5 @@ Edge detection in SystemVerilog refers to the process of identifying transitions
 In SystemVerilog, edge detection typically involves detecting rising edges (transitions from low to high) or falling edges (transitions from high to low) within digital signals. This process is often implemented using edge-sensitive primitives or constructs provided by the language.
 
 Edge detection is fundamental in many digital design and verification tasks, including state machine design, synchronization, and timing analysis. It allows designers to react to changes in signals and coordinate the behavior of digital systems effectively.
+
+<img src=./edge_detector.svg>
