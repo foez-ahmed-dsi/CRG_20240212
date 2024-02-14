@@ -22,7 +22,7 @@ This device generates `n` clocks output for a selection of `m` PLL clock sources
 | arst_no      | logic unpacked array of `n` | 1                 | output    | Active low asynchronous reset output              |
 
 Modules
-[clk_mux_2x1      ](./docs/clk_mux_2x1.md)
-[clock_gate       ](./docs/clock_gate.md)
-[delay_gen_doc    ](./docs/delay_gen_doc.md)
-[edge_detector_doc](./docs/edge_detector_doc.md)
+- [clk_mux_2x1      ](./docs/clk_mux_2x1.md)
+- [clock_gate       ](./docs/clock_gate.md)
+- [delay_gen_doc    ](./docs/delay_gen_doc.md)
+- [edge_detector_doc](./docs/edge_detector_doc.md)
