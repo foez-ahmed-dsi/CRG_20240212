@@ -7,18 +7,19 @@ module delaygen #(
     output logic                  out
 );
   
-  logic [$clog(n+1)-1:0] count
+  logic [$clog(n+1)-1:0] count;
+  always_comb begin 
+      en=~out;
+     end
   always_ff @(posedge clk or negedge rst) begin
     if (rst) 
         count<= 0;
-	out  <= 0;
-	en<=0;
+	    out  <= 0;
     else begin
     	if(count< count_range) begin
-count <= count + 1; 
+            count <= count + 1; 
       end else begin
 		out<=1;
-		en <=0;
 
       end
 endmodule
