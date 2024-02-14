@@ -20,4 +20,3 @@ Benefits: Clock gating helps reduce dynamic power consumption by preventing unne
 Overall, clock gating is a valuable technique for improving the power efficiency of digital designs by selectively controlling the distribution of the clock signal based on specific conditions or requirements.
 
 <img src="./clk_gate.svg">
-
