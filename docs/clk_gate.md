@@ -1,4 +1,5 @@
-# Introduction:
+# Clock Gating
+## Introduction:
 Clock gating is a technique used in digital design to reduce power consumption by controlling when the clock signal is applied to specific circuit elements. Clock gating involves adding additional logic to a design to selectively enable or disable the clock signal to certain parts of the circuitry based on specific conditions.
 
 Here's how clock gating works:
