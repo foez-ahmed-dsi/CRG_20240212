@@ -16,17 +16,32 @@ module clk_mux_4x1(
 
     logic pll_out_0;
     logic pll_out_1;
-    
+
 //////////////////////////////////////////////////////////////////////////////////////////////////
 // INSTNTIATION
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
-    clk_mux_2x1 inst_0 (.sel_i(sel_i[0]), .pll_1_i(pll_i[0]), .pll_2_i(pll_i[1]), .clk_o(pll_out_0));
+    clk_mux_2x1 inst_0 (
+        .sel_i(sel_i[0]),
+        .pll_1_i(pll_i[0]),
+        .pll_2_i(pll_i[1]),
+        .clk_o(pll_out_0)
+    );
 
 
-    clk_mux_2x1 inst_1 (.sel_i(sel_i[0]), .pll_1_i(pll_i[2]), .pll_2_i(pll_i[3]), .clk_o(pll_out_1));
+    clk_mux_2x1 inst_1 (
+        .sel_i(sel_i[0]),
+        .pll_1_i(pll_i[2]),
+        .pll_2_i(pll_i[3]),
+        .clk_o(pll_out_1)
+    );
 
 
-    clk_mux_2x1 inst_2 (.sel_i(sel_i[1]), .pll_1_i(pll_out_0), .pll_2_i(pll_out_1), .clk_o(pll_o));
+    clk_mux_2x1 inst_2 (
+        .sel_i(sel_i[1]),
+        .pll_1_i(pll_out_0),
+        .pll_2_i(pll_out_1),
+        .clk_o(pll_o)
+    );
 
 endmodule
