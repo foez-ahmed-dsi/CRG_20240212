@@ -4,12 +4,12 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
 /*
-M	int	Number of PLL sources
-N	int	Number of clock reset outputs
+M   int Number of PLL sources
+N   int Number of clock reset outputs
 */
 
 module top_module #(parameter M = 4, parameter N = 8) (
-  
+
     input logic pll_i[M],
     input logic [$clog2(M)-1:0]sel_i[N],
     input logic glob_arst_n_i,
@@ -28,7 +28,7 @@ module top_module #(parameter M = 4, parameter N = 8) (
     genvar i;
 
     generate
-        
+
         for (i = 0; i < N; i++) begin
             sub_top_module sub_top_module_inst(
                 .pll_i(pll_i[M-1:0]),
@@ -44,8 +44,5 @@ module top_module #(parameter M = 4, parameter N = 8) (
 
     endgenerate
 
-
-
 endmodule
-
 

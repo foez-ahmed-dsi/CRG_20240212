@@ -16,8 +16,8 @@ module upper_module
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
     logic clk_mux_out_net;
-    
-    
+
+
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -29,7 +29,7 @@ module upper_module
         .pll_i(pll_i),
         .pll_o(clk_mux_out_net)
     );
-                                    
+
     clock_gate clk_gate_inst (
         .en_i(en_i),
         .clk_i(clk_mux_out_net),

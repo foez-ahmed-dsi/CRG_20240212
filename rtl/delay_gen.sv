@@ -4,7 +4,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 module delay_gen #(
-    parameter COUNT_RANGE=128
+    parameter int COUNT_RANGE = 128
 )(
     input  logic                  clk_i,
     input  logic                  arst_n_i,
@@ -14,14 +14,14 @@ module delay_gen #(
 //////////////////////////////////////////////////////////////////////////////////////////////////
 // SIGNALS
 //////////////////////////////////////////////////////////////////////////////////////////////////
-  
+
     logic [$clog(n+1)-1:0] count_net;
     logic                  en_net;
-    
+
 //////////////////////////////////////////////////////////////////////////////////////////////////
 // COMBINATIONAL
 //////////////////////////////////////////////////////////////////////////////////////////////////
-    
+
     assign delayed_o=(count_net + 1 == COUNT_RANGE);
     assign en_net=~delayed_o;
 
@@ -34,9 +34,10 @@ module delay_gen #(
             count_net <= 0;
         end else begin
             if(en) begin
-                count_net <= count_net + 1; 
+                count_net <= count_net + 1;
             end
         end
     end
-	
+
 endmodule
+
