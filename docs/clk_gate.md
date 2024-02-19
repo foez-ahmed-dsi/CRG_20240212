@@ -8,6 +8,8 @@ Clock Signal: In synchronous digital circuits, a clock signal is used to synchro
 
 Clock Gating Circuit: A clock gating circuit typically consists of a gating logic element and a control signal. The gating logic determines whether the clock signal should be allowed to pass through to the downstream elements based on the control signal.
 
+Here, as clock gating is just passing the existing clock according to enable, we could simply use the clock and enable signal as inputs of "and" gate, rather we used a flop because it makes enable synchronous to cloock. Thus no glitch/deadone is detected at the output.
+
 Enable Signal: The control signal, also known as the enable signal, controls whether the clock signal is gated (blocked) or allowed to propagate through the clock gating circuit.
 
 Schematic: A basic clock gating schematic might consist of an AND gate and an enable signal. The clock signal is connected to one input of the AND gate, and the enable signal is connected to the other input. The output of the AND gate provides the gated clock signal.
