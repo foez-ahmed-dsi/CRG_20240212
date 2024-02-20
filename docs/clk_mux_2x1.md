@@ -5,7 +5,7 @@ A Clock MUX or glitch-free multiplexer is a digital circuit component used in el
 
 Glitches can occur in traditional multiplexers when there is a delay mismatch between the selection control signals and the data inputs. This delay mismatch can lead to temporary signal disruptions or glitches at the output, which can potentially cause errors in downstream digital circuits or systems.
 
-To address this issue, glitch-free muxes are designed with special circuitry or techniques to ensure that the output signal remains stable and free from glitches during input selection transitions. This typically involves synchronizing the switching of the multiplexer with the input data signals or using techniques such as signal conditioning, filtering, or delay elements to mitigate the effects of glitches.
+To address this issue, glitch-free muxes are designed with special circuitry or techniques to ensure that the output signal remains stable and free from glitches during input selection transitions. This typically involves synchronizing the switching of the multiplexer with the input data signals. To sync, both single and double synchronizer, where double sync gives better immunity to metastability, and single gives simple and low cost solution. We used single synchronizer approach here. 
 
 <img src="./clk_mux_2x1.svg">
 
