@@ -90,14 +90,13 @@ module clk_gate_tb;
   //-METHODS{{{
   //////////////////////////////////////////////////////////////////////////////////////////////////
 
-  task static apply_reset();  
+  task static apply_reset(); 
     #100ns;
     arst_ni <= 0;
     #100ns;
     arst_ni <= 1;
     #100ns;
   endtask
-    
   task static rand_switch(realtime unit_time = 1ns, int unsigned min = 100,
                           int unsigned max = 1000);
     fork
@@ -106,7 +105,7 @@ module clk_gate_tb;
          en_i <= $urandom;
       end
     join_none
-  endtask  
+  endtask
 
   //}}}
 
@@ -115,7 +114,6 @@ module clk_gate_tb;
   //////////////////////////////////////////////////////////////////////////////////////////////////
   `CLOCK_GLITCH_MONITOR(clk_i, arst_ni, 5ns, 5ns)
   `CLOCK_EN_MONITOR(en_i, arst_ni,clk_i,pll_o)
-    
   initial begin  // main initial{{{
 
     apply_reset();
