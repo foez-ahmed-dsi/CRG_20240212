@@ -47,7 +47,7 @@ module edge_detector_tb;
   //////////////////////////////////////////////////////////////////////////////////////////////////
   logic err_n=0;
   logic err_p=0;
-
+  
 
   //}}}
 
@@ -80,7 +80,7 @@ module edge_detector_tb;
   //////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-
+    
 edge_detector u_edge_detector(
     .e_data_i(in),
     .clk_ref_i(clk_i),
@@ -101,7 +101,7 @@ edge_detector u_edge_detector(
          in <= $urandom;
       end
     join_none
-  endtask
+  endtask 
 
   //}}}
 
@@ -123,11 +123,11 @@ edge_detector u_edge_detector(
       end
     end
   end
-  final begin
+  final begin                                                                                      
       result_print(err_n,"Didnt go low at first posedge!!");
-      result_print(err_p,"Didnt go high at second posedge!!");
+      result_print(err_p,"Didnt go high at second posedge!!");                                                
     end
-
+   
 
   initial begin  // main initial{{{
     start_clk_i();

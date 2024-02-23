@@ -20,7 +20,7 @@ module delay_gen_tb;
   //////////////////////////////////////////////////////////////////////////////////////////////////
   //-LOCALPARAMS{{{
   //////////////////////////////////////////////////////////////////////////////////////////////////
-  localparam int Count = 128;
+  localparam int count = 128;
 
 
 
@@ -80,9 +80,10 @@ module delay_gen_tb;
   //////////////////////////////////////////////////////////////////////////////////////////////////
   //-RTLS{{{
   //////////////////////////////////////////////////////////////////////////////////////////////////
+    
 
     delay_gen #(
-      .COUNT_RANGE(Count)
+      .COUNT_RANGE(count)
     ) u_delay_gen(
       .clk_i(clk_i),
       .arst_ni(arst_ni),
@@ -117,12 +118,13 @@ module delay_gen_tb;
   //////////////////////////////////////////////////////////////////////////////////////////////////
   //-PROCEDURALS{{{
   //////////////////////////////////////////////////////////////////////////////////////////////////
+   
   always @(posedge clk_i or negedge arst_ni) begin
     if (~arst_ni) begin
       ext_count<=0;
     end else begin
       ext_count<= ext_count+1;
-      if (ext_count == Count-1 ) begin
+      if (ext_count == count-1 ) begin
         #1fs
         if (out != 1) begin
           output_mismatch=1;
@@ -136,7 +138,7 @@ module delay_gen_tb;
     repeat (10) @ (posedge clk_i);
     apply_sync_reset();
     #0.5ms;
-    result_print(!output_mismatch,"delay_check!!");
+    result_print(!output_mismatch,"delay_check!!");                                                
     $finish;
   end  //}}}
 

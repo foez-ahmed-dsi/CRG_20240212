@@ -8,8 +8,8 @@ module top_module #(
     parameter int N = 8  // N - int Number of clock reset outputs
 ) (
 
-    input logic pll_i [4],
-    input logic [$clog2(M)-1:0] sel_i[N-1:0],
+    input logic pll_i[M],
+    input logic [$clog2(M)-1:0]sel_i[N],
     input logic glob_arst_ni,
     input logic arst_req_i[N],
     input logic ref_clk_i,

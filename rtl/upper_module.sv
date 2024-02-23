@@ -34,7 +34,7 @@ module upper_module
         .en_i(en_i),
         .clk_i(clk_mux_out_net),
         .arst_ni(arst_ni),
-        .pll_o(clk_out_o)
+        .pll_o(clk_out)
     );
 
 endmodule
