@@ -14,9 +14,8 @@ module delay_gen #(
 //////////////////////////////////////////////////////////////////////////////////////////////////
 // SIGNALS
 //////////////////////////////////////////////////////////////////////////////////////////////////
-    
-    localparam int COUNT_RANGE_PLUS_ONE = COUNT_RANGE + 1;
-    localparam int n = $clog2(COUNT_RANGE_PLUS_ONE);
+    localparam int CountP1 = COUNT_RANGE + 1;
+    localparam int n = $clog2(CountP1);
     logic [n-1:0] count_net;
     logic                  en_net;
 
