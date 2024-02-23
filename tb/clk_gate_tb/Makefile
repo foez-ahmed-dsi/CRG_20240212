@@ -9,3 +9,8 @@ run:
 
 clean:
 	@rm -rf $(CLEAN_TARGETS)
+
+.PHONY: simulate
+simulate: 
+	@echo "$(TOP)" > ___TOP
+	$(MAKE) clean run TOP=$(TOP) CONFIG=$(CONFIG)
