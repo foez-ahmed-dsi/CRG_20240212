@@ -13,7 +13,7 @@
 
 1. `pll_i[M]`: Input array representing PLL sources.
 2. `sel_i[N]`: Input array of selection signals for each clock reset output. 
-3. `glob_arst_n_i`: Global asynchronous reset input signal.
+3. `glob_arst_ni`: Global asynchronous reset input signal.
 4. `arst_req_i[N]`: Array of asynchronous reset request signals.
 5. `ref_clk_i`: Reference clock input signal.
 6. `en_i[N]`: Array of enable signals for each clock reset output.
@@ -37,12 +37,12 @@ generate
         sub_top_module sub_top_module_inst(
             .pll_i(pll_i[M-1:0]),
             .sel_i(sel_i[$clog2(M)-1:0]),
-            .glob_arst_n_i(glob_arst_n_i),
+            .glob_arst_ni(glob_arst_ni),
             .arst_req_i(arst_req_i[i]),
             .ref_clk_i(ref_clk_i),
             .en_i(en_i[i]),
             .clk_o(clk_o[i]),
-            .arst_n_o(arstn_o[i])
+            .arst_no(arstn_o[i])
         );
     end
 endgenerate
@@ -60,7 +60,7 @@ Here's an example instantiation of `top_module` with M=4 and N=8:
 top_module #(4, 8) top_instance (
   .pll_i(pll_sources),
   .sel_i(selection_signals),
-  .glob_arst_n_i(global_arst_n),
+  .glob_arst_ni(global_arst_n),
   .arst_req_i(reset_requests),
   .ref_clk_i(reference_clock),
   .en_i(enable_signals),

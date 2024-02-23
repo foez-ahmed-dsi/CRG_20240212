@@ -7,15 +7,16 @@ module delay_gen #(
     parameter int COUNT_RANGE = 128
 )(
     input  logic                  clk_i,
-    input  logic                  arst_n_i,
+    input  logic                  arst_ni,
     output logic                  delayed_o
 );
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 // SIGNALS
 //////////////////////////////////////////////////////////////////////////////////////////////////
-
-    logic [$clog(n+1)-1:0] count_net;
+    localparam int CountP = COUNT_RANGE + 1;
+    localparam int N = $clog2(CountP);
+    logic [N-1:0] count_net;
     logic                  en_net;
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -23,17 +24,19 @@ module delay_gen #(
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
     assign delayed_o=(count_net + 1 == COUNT_RANGE);
-    assign en_net=~delayed_o;
+    always_comb begin
+         en_net=~delayed_o;
+    end
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 // SEQUENTIAL
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
-    always_ff @(posedge clk_i or negedge arst_n_i) begin
-        if (arst_n_i) begin
+    always_ff @(posedge clk_i or negedge arst_ni) begin
+        if (~arst_ni) begin
             count_net <= 0;
         end else begin
-            if(en) begin
+            if(en_net) begin
                 count_net <= count_net + 1;
             end
         end

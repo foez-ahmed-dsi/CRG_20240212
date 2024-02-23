@@ -7,7 +7,7 @@
 module clk_gate(
     input logic en_i,
     input logic clk_i,
-    input logic arstn_i,
+    input logic arst_ni,
     output logic pll_o
 );
 
@@ -30,8 +30,8 @@ module clk_gate(
 // SEQUENTIAL
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
-    always_ff @ (posedge clk_inv_net or negedge arstn_i) begin
-        if (~arstn_i) begin
+    always_ff @ (posedge clk_inv_net or negedge arst_ni) begin
+        if (~arst_ni) begin
             q_holder_net <= 0;
         end else begin
             q_holder_net <= en_i;
