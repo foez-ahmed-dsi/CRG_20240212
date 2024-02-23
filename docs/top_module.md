@@ -42,7 +42,7 @@ generate
             .ref_clk_i(ref_clk_i),
             .en_i(en_i[i]),
             .clk_o(clk_o[i]),
-            .arst_n_o(arstn_o[i])
+            .arst_no(arstn_o[i])
         );
     end
 endgenerate

@@ -2,11 +2,11 @@
 //Author: Md Nazmus Sakib
 //This is the top module to generate asynchronous output reset
 ///////////////////////////////////////////////////////////////////////////////
-module arst_n_o(
+module arst_no(
     input  logic    glob_arst_ni,
     input  logic    arst_req_i,
     input  logic    ref_clk_i,
-    output logic    arst_n_o
+    output logic    arst_no
 );
 
     logic          e_data_i;
@@ -14,7 +14,7 @@ module arst_n_o(
     logic          out;
 
     assign e_data_i = glob_arst_ni && ~arst_req_i;
-    assign arst_n_o = e_data_i      && out;
+    assign arst_no = e_data_i      && out;
 
 
     edge_detector edge_detector_inst(
