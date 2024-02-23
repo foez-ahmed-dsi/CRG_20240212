@@ -90,7 +90,7 @@ module clk_gate_tb;
   //-METHODS{{{
   //////////////////////////////////////////////////////////////////////////////////////////////////
 
-  task static apply_reset(); 
+  task static apply_reset();
     #100ns;
     arst_ni <= 0;
     #100ns;
