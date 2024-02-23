@@ -3,7 +3,7 @@
 //This is the top module to generate asynchronous output reset
 ///////////////////////////////////////////////////////////////////////////////
 module arst_n_o(
-    input  logic    glob_arst_n_i,
+    input  logic    glob_arst_ni,
     input  logic    arst_req_i,
     input  logic    ref_clk_i,
     output logic    arst_n_o
@@ -13,7 +13,7 @@ module arst_n_o(
     logic          edge_out_bar_o;
     logic          out;
 
-    assign e_data_i = glob_arst_n_i && ~arst_req_i;
+    assign e_data_i = glob_arst_ni && ~arst_req_i;
     assign arst_n_o = e_data_i      && out;
 
 

@@ -6,7 +6,7 @@ module upper_module
 (
     input logic [3:0] pll_i,
     input logic [1:0] sel_i,
-    input logic arst_n_i,
+    input logic arst_ni,
     input logic en_i,
     output logic clk_out_o
 );
@@ -33,7 +33,7 @@ module upper_module
     clock_gate clk_gate_inst (
         .en_i(en_i),
         .clk_i(clk_mux_out_net),
-        .arstn_i(arst_n_i),
+        .arst_ni(arst_ni),
         .pll_o(clk_out)
     );
 

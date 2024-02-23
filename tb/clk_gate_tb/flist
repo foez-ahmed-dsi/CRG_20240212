@@ -1,0 +1,2 @@
+../../rtl/clk_gate.sv
+clk_gate_tb.sv

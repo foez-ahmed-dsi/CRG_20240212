@@ -10,7 +10,7 @@ module top_module #(
 
     input logic pll_i[M],
     input logic [$clog2(M)-1:0]sel_i[N],
-    input logic glob_arst_n_i,
+    input logic glob_arst_ni,
     input logic arst_req_i[N],
     input logic ref_clk_i,
     input logic en_i[N],
@@ -27,7 +27,7 @@ module top_module #(
         sub_top_module sub_top_module_inst(
             .pll_i(pll_i[M-1:0]),
             .sel_i(sel_i[$clog2(M)-1:0]),
-            .glob_arst_n_i(glob_arst_n_i),
+            .glob_arst_ni(glob_arst_ni),
             .arst_req_i(arst_req_i[i]),
             .ref_clk_i(ref_clk_i),
             .en_i(en_i[i]),
