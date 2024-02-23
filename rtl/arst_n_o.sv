@@ -27,7 +27,7 @@ module arst_n_o(
         .count_range(128)
     ) delay_gen_inst (
         .clk(ref_clk_i),
-        .arst_n(edge_out_bar_o),
+        .arst_ni(edge_out_bar_o),
         .out(out)
     );
 
