@@ -26,3 +26,4 @@ Modules
 - [clock_gate   ](./docs/clock_gate.md)
 - [delay_gen    ](./docs/delay_gen.md)
 - [edge_detector](./docs/edge_detector.md)
+
