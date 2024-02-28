@@ -19,16 +19,16 @@ module arst_no(
 
     edge_detector edge_detector_inst(
         .e_data_i(e_data_i),
-        .clk_ref(ref_clk_i),
-        .edge_out_bar(edge_out_bar_o)
+        .clk_ref_i(ref_clk_i),
+        .edge_out_bar_o(edge_out_bar_o)
     );
 
     delay_gen #(
-        .count_range(128)
+        .COUNT_RANGE(128)
     ) delay_gen_inst (
-        .clk(ref_clk_i),
+        .clk_i(ref_clk_i),
         .arst_ni(edge_out_bar_o),
-        .out(out)
+        .delayed_o(out)
     );
 
 endmodule

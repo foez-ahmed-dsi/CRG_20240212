@@ -5,7 +5,7 @@
 
 module clk_mux_4x1(
     input logic [1:0] sel_i,
-    input logic [3:0] pll_i,
+    input logic pll_i [4],
     output logic pll_o
 );
 

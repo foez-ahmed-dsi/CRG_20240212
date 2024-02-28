@@ -1,0 +1,10 @@
+../../rtl/arst_n_o.sv
+../../rtl/clk_gate.sv
+../../rtl/clk_mux_2x1.sv
+../../rtl/clk_mux_4x1.sv
+../../rtl/delay_gen.sv
+../../rtl/edge_detector.sv
+../../rtl/top_module.sv
+../../rtl/sub_top_module.sv
+../../rtl/upper_module.sv
+top_module_tb.sv

@@ -10,8 +10,8 @@ run:
 clean:
 	@rm -rf $(CLEAN_TARGETS)
 
-.PHONY: simulate
-simulate: 
-	@echo "$(TOP)" > ___TOP
-	$(MAKE) clean run TOP=$(TOP) CONFIG=$(CONFIG)
+gui:
+	@xvlog -i ../../include -sv $(FLIST)
+	@xelab $(TOP) -s top
+	@xsim top -gui
 	
