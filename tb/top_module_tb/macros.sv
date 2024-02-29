@@ -8,26 +8,17 @@ always @ (posedge ref_clk_i or arst_req_i or glob_arst_ni) begin
     end
 end
 
+logic en_i_v [N][M];
 generate
-    for (genvar j=0; j<N ;j++) begin : output_clock_selection_loop
-      for (genvar i = 0; i < M; i++) begin : glitch_monitor_loop
-        if (sel_i[i]) begin
-            if(sel_i[i] != sel_i_p) begin
-                sel_i_p<=sel_i[i];
-                #100ns;
-                `CLOCK_GLITCH_MONITOR(clk_o[j], arst_no[j], T[i], T[i])
-                `CLOCK_MATCHING(en_i[j], pll_i[i], clk_o[j])
-                `DELAY_MONITOR(arst_glob_i[j], C, arst_no[j])
-                `CLOCK_EN_RST_MONITOR(en_i[j], arst_no[j], pll_i[i],clk_o[j] ) 
-            end else begin
-                sel_i_p<=sel_i[i];
-                `CLOCK_GLITCH_MONITOR(clk_o[j], arst_no[j], T[i], T[i])
-                `CLOCK_MATCHING(en_i[j], pll_i[i], clk_o[j])
-                `DELAY_MONITOR(arst_glob_i[j], C, arst_no[j])
-                `CLOCK_EN_RST_MONITOR(en_i[j], arst_no[j], pll_i[i],clk_o[j] )
-
-            end
+  for (genvar j = 0; j < N; j++) begin : outer_loop
+    for (genvar i = 0; i < M; i++) begin : inner_loop
+      always @ (sel[i]) begin
+        if (en_i[j] && arst_glob_i[j]) begin
+          #200ns;
+          en_i_v [j][i] <= 1;
+          `CLOCK_MATCHING( en_i_v [j][i], pll_i[i], clk_o[j])
         end
       end
     end
+  end
 endgenerate
