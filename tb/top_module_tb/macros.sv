@@ -22,3 +22,25 @@ generate
     end
   end
 endgenerate
+
+
+initial begin
+  forever begin
+      en_i_v[j][i]=0;
+    fork
+      begin
+        @(sel_i[j] or reset[j] or en[j])
+        disable fork;
+      end
+      begin
+        #200ns;
+        if(arst && en) en_i_v=1;
+        @(en_i or arst_nI && sel_i)
+        disable fork;
+      end
+    join
+  end
+end
+
+
+

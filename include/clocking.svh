@@ -158,13 +158,14 @@
       forever begin                                                                                \
         @(posedge ``__CLK__``);                                                                    \
         output_mismatch =1;                                                                        \
+        $warning(`"``__CLK__`` delay is less than %0f`", ``__COUNT__``);                           \
       end                                                                                          \
     join_any                                                                                       \
     disable fork;                                                                                  \
   end                                                                                              \
   final begin                                                                                      \
-    result_print(output_mismatch,                                                                  \
-      `"Delay of 1.28us matched`");                                                                \
+    result_print(!output_mismatch,                                                                 \
+      `"``__CLK__`` matching delay`");                                                             \
   end                                                                                              \
 
 `define CLOCK_EN_RST_MONITOR(__EN__, __RST__,__SRC_CLK__,__DEST_CLK__)                             \

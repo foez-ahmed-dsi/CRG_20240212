@@ -34,7 +34,7 @@ module top_module_tb;
   
   localparam int M = 4;
   localparam int N = 8;
-  localparam int C = 1295;
+  localparam int C = 1280;
   
   
   //}}}
@@ -75,6 +75,7 @@ module top_module_tb;
   
   logic arst_glob_i[N];
   logic en_i_v [N][M];
+  logic arst_v[N];
 
 
   assign pll_i[0]=pll_i_0;
@@ -230,20 +231,51 @@ module top_module_tb;
 
   generate
     for (genvar j = 0; j < N; j++) begin
-      `CLOCK_GLITCH_MONITOR(arst_no[j],clk_o[j], 1ns, 1ns)
-      `DELAY_MONITOR(arst_glob_i[0], C, clk_o[0])
+      //`CLOCK_GLITCH_MONITOR(arst_no[j],clk_o[j], 1ns, 1ns)
+      `DELAY_MONITOR(arst_glob_i[j], C, clk_o[j])
       for (genvar i = 0; i < M; i++) begin
-        always @ (sel_i[j]) begin
-          if (en_i[j] && arst_glob_i[j]) begin
-            en_i_v [j][i] <= 0;
-            #200ns;
-            en_i_v [j][i] <= 1;
-          end else begin
-            en_i_v [j][i] <= 0;
+        initial begin
+          forever begin
+            en_i_v[j][i]=0;
+            fork
+              begin
+                @(sel_i[j] or arst_no[j] or en_i[j])
+                disable fork;
+              end
+              begin
+                #200ns;
+                if(arst_no[j] && en_i[j]) en_i_v[j][sel_i[j]]=1;
+                @(arst_no[j] or en_i[j] or sel_i[j])
+                disable fork;
+              end
+            join
           end
         end
-        `CLK_MATCH_MON( en_i_v [j][i], pll_i[i], clk_o[j])
+        `CLK_MATCH_MON( en_i_v [j][i], pll_i[sel_i[j]], clk_o[j])
       end
+    end
+  endgenerate
+
+  generate
+    for (genvar j = 0; j < N; j++) begin
+      initial begin
+          forever begin
+            arst_v[j]=0;
+            fork
+              begin
+                @(sel_i[j] or arst_no[j])
+                disable fork;
+              end
+              begin
+                #200ns;
+                if(arst_no[j]) arst_v[j]=1;
+                @(sel_i[j] or arst_no[j])
+                disable fork;
+              end
+            join
+          end
+        end
+      `CLOCK_GLITCH_MONITOR(arst_v[j],clk_o[j], 1ns, 1ns)
     end
   endgenerate
 
