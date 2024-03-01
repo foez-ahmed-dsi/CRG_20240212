@@ -13,7 +13,7 @@
   
 module top_module_tb;
   
-  ````````````````````````  
+ 
   `define ENABLE_DUMPFILE
   //////////////////////////////////////////////////////////////////////////////////////////////////
   //-IMPORTS{{{
@@ -26,7 +26,7 @@ module top_module_tb;
   
   //}}}
   
-  S
+
   //////////////////////////////////////////////////////////////////////////////////////////////////
   //-LOCALPARAMS{{{
   //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -34,6 +34,7 @@ module top_module_tb;
   
   localparam int M = 4;
   localparam int N = 8;
+  localparam int C = 1280;
   
   
   //}}}
@@ -70,14 +71,21 @@ module top_module_tb;
   logic en_i[N] = '{N{1'b1}};
   logic clk_o[N];
   logic arst_no[N];
+  logic [$clog2(M)-1:0] sel_i_p [N]= '{N{1'b0}};
+  
+  logic arst_glob_i[N];
+  logic en_i_v [N][M];
+  logic arst_v[N];
+
 
   assign pll_i[0]=pll_i_0;
   assign pll_i[1]=pll_i_1;
   assign pll_i[2]=pll_i_2;
   assign pll_i[3]=pll_i_3;
+ 
+  
   //}}}
-  
-  
+
   //////////////////////////////////////////////////////////////////////////////////////////////////
   //-VARIABLES{{{
   //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -214,10 +222,62 @@ module top_module_tb;
   //-PROCEDURALS{{{
   //////////////////////////////////////////////////////////////////////////////////////////////////
 
-  `CLOCK_GLITCH_MONITOR(clk_i, arst_ni, 5ns, 5ns)
-  `CLOCK_GLITCH_MONITOR(clk_i, arst_ni, 5ns, 5ns)
-  `CLOCK_GLITCH_MONITOR(clk_i, arst_ni, 5ns, 5ns)
-  `CLOCK_GLITCH_MONITOR(clk_i, arst_ni, 5ns, 5ns)
+  always_comb begin
+      for (int i = 0; i < N; i++) begin
+          arst_glob_i[i] = ~arst_req_i[i] && glob_arst_ni;
+      end
+  end
+
+
+  generate
+    for (genvar j = 0; j < N; j++) begin
+      //`CLOCK_GLITCH_MONITOR(arst_no[j],clk_o[j], 1ns, 1ns)
+      `DELAY_MONITOR(arst_glob_i[j], C, clk_o[j])
+      for (genvar i = 0; i < M; i++) begin
+        initial begin
+          forever begin
+            en_i_v[j][i]=0;
+            fork
+              begin
+                @(sel_i[j] or arst_no[j] or en_i[j])
+                disable fork;
+              end
+              begin
+                #200ns;
+                if(arst_no[j] && en_i[j]) en_i_v[j][sel_i[j]]=1;
+                @(arst_no[j] or en_i[j] or sel_i[j])
+                disable fork;
+              end
+            join
+          end
+        end
+        `CLK_MATCH_MON( en_i_v [j][i], pll_i[sel_i[j]], clk_o[j])
+      end
+    end
+  endgenerate
+
+  generate
+    for (genvar j = 0; j < N; j++) begin
+      initial begin
+          forever begin
+            arst_v[j]=0;
+            fork
+              begin
+                @(sel_i[j] or arst_no[j])
+                disable fork;
+              end
+              begin
+                #200ns;
+                if(arst_no[j]) arst_v[j]=1;
+                @(sel_i[j] or arst_no[j])
+                disable fork;
+              end
+            join
+          end
+        end
+      `CLOCK_GLITCH_MONITOR(arst_v[j],clk_o[j], 1ns, 1ns)
+    end
+  endgenerate
 
   initial begin  // main initial{{{
     
@@ -237,6 +297,5 @@ module top_module_tb;
     $finish;
 
   end  //}}}
-
   //}}}
 endmodule

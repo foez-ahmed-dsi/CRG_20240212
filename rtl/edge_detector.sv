@@ -39,4 +39,3 @@ module edge_detector(
 
 
 endmodule
-

@@ -1,4 +1,4 @@
-../../rtl/arst_n_o.sv
+../../rtl/arst_no.sv
 ../../rtl/clk_gate.sv
 ../../rtl/clk_mux_2x1.sv
 ../../rtl/clk_mux_4x1.sv
